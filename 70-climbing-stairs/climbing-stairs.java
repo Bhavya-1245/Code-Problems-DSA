@@ -5,15 +5,15 @@ class Solution {
         int []dp=new int[n+1];
         Arrays.fill(dp,-1);
 
-        return steps(n,0,dp);
+        return steps(n,dp);
         
     }
 
-    public static int steps(int n, int i, int []dp){
-        if(i>n) return 0;
-        if(i==n) return 1;
-        if(dp[i]!=-1) return dp[i];
-        return dp[i]=steps(n,i+1,dp)+steps(n,i+2,dp);
+    public static int steps(int n, int []dp){
+        if(n<0) return 0;
+        if(n==0) return 1;
+        if(dp[n]!=-1) return dp[n];
+        return dp[n]=steps(n-1,dp)+steps(n-2,dp);
         
     }
 }
