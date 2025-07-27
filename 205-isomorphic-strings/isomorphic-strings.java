@@ -2,8 +2,8 @@ class Solution {
     public boolean isIsomorphic(String s, String t) {
         if(s.length()!=t.length()) return false;
 
-        Map<Character, Integer> map1 = new HashMap<>();
-        Map<Character, Integer> map2 = new HashMap<>();
+        HashMap<Character, Integer> map1 = new HashMap<>();
+        HashMap<Character, Integer> map2 = new HashMap<>();
 
         for(int i=0;i<s.length();i++){
             char c1 = s.charAt(i);
