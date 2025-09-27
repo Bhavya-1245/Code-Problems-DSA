@@ -13,14 +13,17 @@ class Solution {
                     int y2 = points[j][1];
                     int y3 = points[k][1];
 
-                    double calArea = 0.5 * Math.abs(x1*(y2-y3)+x2*(y3-y1)+
-                    x3*(y1-y2));
+                    double calArea = max(x1,x2,x3,y1,y2,y3);
 
-                    maxArea = Math.max(maxArea, calArea);
+                    maxArea = maxArea<calArea ? calArea:maxArea;
 
                 }
             }
         }
         return maxArea;
+    }
+
+    public static double max(int x1, int x2, int x3, int y1, int y2, int y3){
+        return 0.5 * Math.abs(x1*(y2-y3)+x2*(y3-y1)+x3*(y1-y2));
     }
 }
