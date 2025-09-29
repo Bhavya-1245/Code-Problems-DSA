@@ -7,11 +7,9 @@ class Solution {
             idx[nums2[i]] = i;
         }
         
-
         for(int i=0; i<nums1.length; i++){
             nums1[i] = greatest(nums2, idx[nums1[i]]);
         }
-        
 
         return nums1;
     }
