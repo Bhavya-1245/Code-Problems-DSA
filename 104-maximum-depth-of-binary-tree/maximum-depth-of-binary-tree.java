@@ -15,7 +15,7 @@
  */
 class Solution {
     public int maxDepth(TreeNode root) {
-        int c = 1;
+        
 
         if(root == null) return 0;
         
