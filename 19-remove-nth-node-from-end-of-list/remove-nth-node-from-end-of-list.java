@@ -23,9 +23,10 @@ class Solution {
         size = size - n;
 
         if(size == 0) return head.next;
-
+        size--;
         temp = head;
-        for(int i = 0; i< size - 1; i++){
+        
+        while(size-->0){
             temp = temp.next;
         }
         temp.next = temp.next.next;
