@@ -1,1 +1,1 @@
-<h2>next-greater-element-i Notes</h2><hr>[ Time taken: 1 d 19 hrs 48 m 24 s ]
+<h2>next-greater-element-i Notes</h2><hr>[ Time taken: 1 d 16 hrs 18 m 40 s ]
