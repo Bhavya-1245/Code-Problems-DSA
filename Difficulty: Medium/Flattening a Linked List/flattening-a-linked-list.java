@@ -14,32 +14,54 @@ class Node {
 class Solution {
     public Node flatten(Node root) {
         // code here
-        List<Integer> arr = new ArrayList<>();
-        
-        Node temp = root;
-        
-        while(temp!=null){
-            Node temp2 = temp;
-            while(temp2!=null){
-                arr.add(temp2.data);
-                temp2 = temp2.bottom;
-            }
-            temp = temp.next;
-        }
-        
-        arr.sort(null);
-        
-        Node dummy = new Node(-1);
-        
-        temp = dummy;
-        
-        for(int i: arr){
-            temp.bottom = new Node(i);
-            temp = temp.bottom;
-        }
-        
-        return dummy.bottom;
+       ArrayList<Integer> arr = new ArrayList<>();
+       Node dummy = new Node(-1);
+       next_func(root, arr);
+       sort(arr, 0, arr.size()-1);
+       merge(dummy, arr, 0);
+       
+       return dummy.bottom;
     }
+    
+    
+    public static void next_func(Node root, List<Integer> arr){
+        if(root == null) return;
+        
+        bottom_func(root, arr);
+        next_func(root.next, arr);
+    }
+    
+    public static void bottom_func(Node root, List<Integer> arr){
+        if(root == null) return;
+        
+        arr.add(root.data);
+        
+        bottom_func(root.bottom, arr);
+    }
+    
+    public static void sort(List<Integer> arr, int s, int e){
+        for(int i=0; i<e; i++){
+            for(int j=0; j<e-i; j++){
+                if(arr.get(j)>arr.get(j+1)){
+                    int temp = arr.get(j);
+                    arr.set(j,arr.get(j+1));
+                    arr.set(j+1,temp);
+                }
+            }
+        }
+    }
+    
+    public static void merge(Node temp, List<Integer> arr, int i){
+        if(i==arr.size()) return;
+        
+        temp.bottom = new Node(arr.get(i));
+        
+        merge(temp.bottom, arr, i+1);
+    }
+    
+    
+    
+    
     
     
 }
