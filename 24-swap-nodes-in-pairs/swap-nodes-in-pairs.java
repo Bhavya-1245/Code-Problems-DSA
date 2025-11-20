@@ -33,4 +33,16 @@ class Solution {
 
         return dummy.next;
     }
+
+    public static void swap(ListNode curr, ListNode prev){
+      if(curr!=null && curr.next!=null) return;
+
+      ListNode first = curr;
+      ListNode second = curr.next;
+      prev.next = second;
+      first.next = second.next;
+      second.next = first;
+
+      swap(first.next, first);
+    }
 }
