@@ -13,30 +13,24 @@ class Solution {
         ListNode add = new ListNode(-1);
         ListNode res = add;
 
-        int carry = 0;
-        
+        add(l1, l2, res, 0, 0);
 
-        while(l1!=null || l2!=null || carry !=0){
-            int sum = carry;
-
-            if(l1!=null){
-                sum += l1.val;
-                l1 = l1.next;
-            }
-
-            if(l2!=null){
-                sum += l2.val;
-                l2 = l2.next;
-            }
-
-            carry = sum/10;
-            int value = sum%10;
-             
-            res.next = new ListNode(value);
-            res = res.next; 
-        }
-
-        
         return add.next;
+    }
+
+    public static void add(ListNode l1, ListNode l2, ListNode res, int carry, int sum){
+      if(!(l1!=null || l2 != null || carry != 0)) return;
+
+      if(l1!=null){
+        sum = sum + l1.val;
+        l1 = l1.next;
+      }
+      if(l2 != null){
+        sum = sum + l2.val;
+        l2 = l2.next;
+      }
+
+      res.next = new ListNode(sum%10);
+      add(l1, l2, res.next, sum/10, sum/10);
     }
 }
