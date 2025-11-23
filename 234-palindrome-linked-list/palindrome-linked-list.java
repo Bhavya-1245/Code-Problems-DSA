@@ -10,39 +10,37 @@
  */
 class Solution {
     public boolean isPalindrome(ListNode head) {
-        if(head.next==null) return true;
-        ListNode slow = head;
-        ListNode fast = head.next;
+        if(head==null || head.next == null) return true;
 
-        while(fast.next!=null && fast.next.next!=null){
-            slow = slow.next;
-            fast = fast.next.next;
-        }
+        ListNode mid = middle(head, head);
 
+        ListNode revList = reverse(mid);
 
-        ListNode rev = reverse(slow.next);
-        slow.next = null;
+        return palin(head, revList);
+    }
 
-        while(head!=null && rev!=null){
-            if(head.val!=rev.val) return false;
-            head = head.next;
-            rev = rev.next;
-        }
-        return true;
+    public static ListNode middle(ListNode slow, ListNode fast){
+      // if(fast==null) return slow;
+      if(fast==null || fast.next==null) return slow;
+      return middle(slow.next, fast.next.next);
     }
 
     public static ListNode reverse(ListNode head){
-        ListNode prev = null;
-        ListNode curr = head;
+        if(head==null || head.next==null) return head;
 
-        while(curr!=null){
-            ListNode temp = curr.next;
-            curr.next = prev;
-            prev = curr;
-           curr = temp;
-        }
+        ListNode new_head = reverse(head.next);
+        head.next.next = head;
+        head.next = null;
 
-        return prev;
+        return new_head;
+    }
+
+    public static boolean palin(ListNode head1, ListNode head2){
+      if(head2==null) return true;
+      if(head1 == null) return false;
+      if(head1.val!=head2.val) return false;
+
+      return palin(head1.next, head2.next);
     }
 
     
