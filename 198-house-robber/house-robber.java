@@ -5,10 +5,10 @@ class Solution {
       if(dp[i]!=-1) return dp[i];
 
       int select1 = nums[i] + solve(nums, i+2, n, dp);
-      int select2 = nums[i] + solve(nums, i+3, n, dp);
+      // int select2 = nums[i] + solve(nums, i+3, n, dp);
       int skip = solve(nums, i+1, n, dp);
 
-      return dp[i] = Math.max(select1, Math.max(select2, skip));
+      return dp[i] = Math.max(select1,  skip);
     }
     public int rob(int[] nums) {
         int n = nums.length;
