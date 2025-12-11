@@ -20,11 +20,11 @@ class Solution {
         for(int i=0; i<n;i++){
           dp[0][i] = triangle.get(n-1).get(i);
         }
-        int k = 2;
+        
         for(int i=1;i<n; i++){
           for(int j=0; j<n-i; j++){
             dp[i][j] = triangle.get(n-i-1).get(j) + Math.min(dp[i-1][j], dp[i-1][j+1]);
-            k++;
+            
           }
         }
 
