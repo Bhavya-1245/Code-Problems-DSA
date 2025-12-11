@@ -16,8 +16,20 @@ class Solution {
     public int minimumTotal(List<List<Integer>> triangle) {
         int n = triangle.size();
         int [][]dp = new int[n][n];
-        for(int []row: dp) Arrays.fill(row, Integer.MIN_VALUE);
-        return minimumSum(triangle, 0, 0, n, dp);
+        
+        for(int i=0; i<n;i++){
+          dp[0][i] = triangle.get(n-1).get(i);
+        }
+        int k = 2;
+        for(int i=1;i<n; i++){
+          for(int j=0; j<n-i; j++){
+            dp[i][j] = triangle.get(n-i-1).get(j) + Math.min(dp[i-1][j], dp[i-1][j+1]);
+            k++;
+          }
+        }
+
+        return dp[n-1][0];
+        
     }
 
 }
