@@ -1,6 +1,6 @@
 class Solution {
   public static int minimumSum(int [][]matrix, int i, int j, int n, int [][]dp){
-        if(i==n-1){
+        if(i==0){
           return matrix[i][j];
         }
         // if(i>=n) return Integer.MAX_VALUE; 
@@ -10,9 +10,9 @@ class Solution {
 
         int left = Integer.MAX_VALUE;
         int right = Integer.MAX_VALUE;
-        int mid = matrix[i][j] + minimumSum(matrix, i+1, j, n, dp);
-        if(j>0) left = matrix[i][j] + minimumSum(matrix, i+1, j-1, n, dp);
-        if(j<n-1) right = matrix[i][j] + minimumSum(matrix, i+1, j+1, n, dp);
+        int mid = matrix[i][j] + minimumSum(matrix, i-1, j, n, dp);
+        if(j>0) left = matrix[i][j] + minimumSum(matrix, i-1, j-1, n, dp);
+        if(j<n-1) right = matrix[i][j] + minimumSum(matrix, i-1, j+1, n, dp);
         sum = Math.min(left, Math.min(mid, right));
         return dp[i][j] = sum;
         
@@ -26,7 +26,7 @@ class Solution {
         int sum = Integer.MAX_VALUE;
         int i = 0;
         for(int j=0; j<n; j++){
-          sum = Math.min(sum,minimumSum(matrix, 0, j, n, dp));
+          sum = Math.min(sum,minimumSum(matrix, n-1, j, n, dp));
         }
         return sum;
     }
