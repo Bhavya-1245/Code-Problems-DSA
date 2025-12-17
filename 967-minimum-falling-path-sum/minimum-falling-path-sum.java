@@ -1,34 +1,29 @@
 class Solution {
-  public static int minimumSum(int [][]matrix, int i, int j, int n, int [][]dp){
-        if(i==0){
-          return matrix[i][j];
-        }
-        // if(i>=n) return Integer.MAX_VALUE; 
-        if(dp[i][j]!=-101) return dp[i][j];
-
-        int sum = 0;
-
-        int left = Integer.MAX_VALUE;
-        int right = Integer.MAX_VALUE;
-        int mid = matrix[i][j] + minimumSum(matrix, i-1, j, n, dp);
-        if(j>0) left = matrix[i][j] + minimumSum(matrix, i-1, j-1, n, dp);
-        if(j<n-1) right = matrix[i][j] + minimumSum(matrix, i-1, j+1, n, dp);
-        sum = Math.min(left, Math.min(mid, right));
-        return dp[i][j] = sum;
-        
-    }
-
+  static int dp[][];
     public int minFallingPathSum(int[][] matrix) {
         int n = matrix.length;
-        // int m = matrix[0].length;
-        int dp[][] = new int[n][n];
-        for(int []row: dp) Arrays.fill(row, -101);
-        int sum = Integer.MAX_VALUE;
-        int i = 0;
-        for(int j=0; j<n; j++){
-          sum = Math.min(sum,minimumSum(matrix, n-1, j, n, dp));
-        }
-        return sum;
-    }
 
+        dp = new int[n][n];
+        int min = Integer.MAX_VALUE;
+        for(int i = 0; i<n; i++){
+          for(int j=0;j<n;j++){
+            if(i==0) dp[0][j] = matrix[0][j];
+            else{
+              if(j>0 && j<n-1){
+                dp[i][j] = Math.min(dp[i-1][j], Math.min(dp[i-1][j-1],dp[i-1][j+1])) + matrix[i][j];
+              }else if(j<n-1){
+                dp[i][j] = Math.min(dp[i-1][j], dp[i-1][j+1]) + matrix[i][j];
+              }else if(j>0){
+                dp[i][j] = Math.min(dp[i-1][j-1], dp[i-1][j]) + matrix[i][j];
+              }
+            }
+
+            if(i==n-1){
+              min = Math.min(min, dp[i][j]);
+            }
+          }
+        }
+
+        return min;
+    }
 }
