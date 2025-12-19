@@ -7,6 +7,7 @@ class Solution {
         }
         int sum1 = 0;
         for(int i=0;i<nums.length-1;i++){
+          
           sum1+=nums[i];
           int diff = (sum-sum1) - sum1;
           if(diff%2==0) count++;
