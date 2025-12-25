@@ -1,2 +1,5 @@
 # Write your MySQL query statement below
-SELECT score, DENSE_RANK() OVER(order by score DESC) as 'rank' from Scores order by score DESC;
+WITH ranked AS (
+  SELECT score, DENSE_RANK() OVER(ORDER BY score DESC) as 'rank' FROM SCORES
+)
+SELECT * FROM ranked;
