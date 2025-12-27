@@ -1,0 +1,2 @@
+# Write your MySQL query statement below
+SELECT o1.customer_number FROM Orders o1 JOIN Orders o2 ON o2.order_number = o1.order_number GROUP BY o2.customer_number ORDER BY COUNT(o2.customer_number) DESC LIMIT 1;
