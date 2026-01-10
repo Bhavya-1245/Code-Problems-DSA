@@ -23,11 +23,11 @@ class Solution {
 
         temp = head;
 
-        i++;
+        n--;
 
-        while(temp.next!=null){
-            i++;
-            if(i==n) break;
+        while(n>1 && temp.next!=null){
+            n--;
+            
             temp = temp.next;
         }
 
