@@ -1,36 +1,31 @@
 class Solution {
-    public boolean exist(char[][] board, String word) {
-        int n = board.length, m = board[0].length;
-        boolean [][]visit = new boolean[n][m];
+    static int m, n;
+    static boolean solve(char[][] board, boolean[][] visit, String s, int i, int j, int k){
+      if(k == s.length()) return true;
 
-        for(int i = 0; i<n; i++){
-          for(int j = 0; j<m; j++){
-            int k = 0;
-            if(word.charAt(k) == board[i][j]){
-                if(word(board, visit, i, j, word, 0, n, m)) return true;
-            }
-            
-          }
-        }
+      if(i<0 || i>m-1 || j<0 || j>n-1 || visit[i][j] || board[i][j]!=s.charAt(k)) return false;
 
-        return false;
-    }
-
-    public static boolean word(char[][] board, boolean[][] visit, int i, int j, 
-    String word, int k, int row, int col){
-      if(k==word.length()) return true;
-      
-      if(i<0 || j<0 || i>=row || j>=col || visit[i][j] || board[i][j] != word.charAt(k))    
-          return false;
-      
-      
-    
       visit[i][j] = true;
-      if(word(board, visit, i+1, j, word, k+1, row, col)) return true; // for down;
-      if(word(board, visit, i, j-1, word, k+1, row, col)) return true; // for left;
-      if(word(board, visit, i, j+1, word, k+1, row, col)) return true; // for right;
-      if(word(board, visit, i-1, j, word, k+1, row, col)) return true; // for up
+
+      if(solve(board, visit, s, i+1, j, k+1)) return true;
+      if(solve(board, visit, s, i, j-1, k+1)) return true;
+      if(solve(board, visit, s, i, j+1, k+1)) return true;
+      if(solve(board, visit, s, i-1, j, k+1)) return true;
+
       visit[i][j] = false;
       return false;
+    }
+    public boolean exist(char[][] board, String s) {
+        m = board.length;
+        n = board[0].length;
+        boolean [][]visit = new boolean[m][n];
+        for(int i=0; i<m; i++){
+          for(int j=0; j<n; j++){
+            if(board[i][j] == s.charAt(0)){
+              if(solve(board, visit, s, i, j, 0)) return true;
+            }
+          }
+        }
+        return false;
     }
 }
