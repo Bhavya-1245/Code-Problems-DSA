@@ -25,7 +25,7 @@ class Solution {
         List<Integer> ans = new ArrayList<>(); // contains safe or terminal nodes
         for(int i=0;i<v;i++){
           if(!visited[i]){
-            if(!dfs(i, graph, visited, path)){ // call dfs to detect cycle
+            if(dfs(i, graph, visited, path)){ // call dfs to detect cycle
               res = true;
             }
           }
@@ -37,7 +37,7 @@ class Solution {
           if(!path[i]) ans.add(i); // add index those are detected as non cycle
         }
 
-        Collections.sort(ans); // to sort nodes in ascending order
+        Collections.sort(ans);
 
         return ans;
         
