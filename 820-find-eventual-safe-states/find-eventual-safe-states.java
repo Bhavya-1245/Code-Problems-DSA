@@ -1,5 +1,5 @@
 class Solution {
-    static int v, e;
+    static int v;
 
     public static boolean dfs(int src, int[][] adj, boolean []visited, boolean []path){
       visited[src] = true;
@@ -16,30 +16,22 @@ class Solution {
     }
 
     public List<Integer> eventualSafeNodes(int[][] graph) {
-        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
-        v = graph.length;
-        //e = graph[0].length;
-        for(int i=0; i<v; i++){
-          adj.add(new ArrayList<>());
-        }
-
-        for(int i=0;i<v;i++){
-          int e = graph[i].length;
-          for(int j=0;j<e;j++){
-            adj.get(i).add(graph[i][j]);
-          }
-        }
+        
+        v = graph.length; // no of vertices
+        
         boolean []path = new boolean[v];
         boolean []visited = new boolean[v];
-        boolean res = false;
+        boolean res = false; // no use
+        List<Integer> ans = new ArrayList<>(); // contains safe or terminal nodes
         for(int i=0;i<v;i++){
           if(!visited[i]){
-            if(dfs(i, graph, visited, path)) res = true;
+            if(!dfs(i, graph, visited, path)){ // call dfs to detect cycle
+              res = true;
+            }
           }
         
         }
 
-        List<Integer> ans = new ArrayList<>();
 
         for(int i=0;i<v;i++){
           if(!path[i]) ans.add(i);
