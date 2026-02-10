@@ -1,14 +1,14 @@
 class Solution {
     static int v, e;
 
-    public static boolean dfs(int src, ArrayList<ArrayList<Integer>> adj, boolean []visited, boolean []path){
+    public static boolean dfs(int src, int[][] adj, boolean []visited, boolean []path){
       visited[src] = true;
       path[src] = true;
 
-      for(int ngh:adj.get(src)){
-        if(!visited[ngh]){
-          if(dfs(ngh, adj, visited, path)) return true;
-        }else if(path[ngh]) return true;
+      for(int ngh=0; ngh<adj[src].length;ngh++){
+        if(!visited[adj[src][ngh]]){
+          if(dfs(adj[src][ngh], adj, visited, path)) return true;
+        }else if(path[adj[src][ngh]]) return true;
       }
 
       path[src] = false;
@@ -34,7 +34,7 @@ class Solution {
         boolean res = false;
         for(int i=0;i<v;i++){
           if(!visited[i]){
-            if(dfs(i, adj, visited, path)) res = true;
+            if(dfs(i, graph, visited, path)) res = true;
           }
         
         }
